@@ -28,15 +28,13 @@ function loadGame() {
 }
 
 function updateThingies() {
-  if (userOffenseDisplay)
-    userOffenseDisplay.innerHTML = `${game.offense.toFixed(1)}`;
-  if (userDefenseDisplay)
-    userDefenseDisplay.innerHTML = `${game.defense.toFixed(1)}`;
+  if (userOffenseDisplay) userOffenseDisplay.innerHTML = `${game.offense}`;
+  if (userDefenseDisplay) userDefenseDisplay.innerHTML = `${game.defense}`;
 
   if (enemyOffenseDisplay)
-    enemyOffenseDisplay.innerHTML = `${(3 * 10 ** game.stage).toFixed(1)}`;
+    enemyOffenseDisplay.innerHTML = `${3 * 10 ** game.stage}`;
   if (enemyDefenseDisplay)
-    enemyDefenseDisplay.innerHTML = `${(10 ** (game.stage - 1)).toFixed(1)}`;
+    enemyDefenseDisplay.innerHTML = `${10 ** (game.stage - 1)}`;
 
   if (stageDisplay) stageDisplay.innerHTML = `Stage: ${game.stage}`;
 }
