@@ -4,7 +4,7 @@ const userDefenseDisplay = document.getElementById("userDefense");
 const enemyOffenseDisplay = document.getElementById("enemyOffense");
 const enemyDefenseDisplay = document.getElementById("enemyDefense");
 const stageDisplay = document.getElementById("stage");
-let game = {
+let gameData = {
     offense: 0,
     defense: 0,
     mana: 0,
@@ -14,42 +14,43 @@ let game = {
 };
 // Function to save game state to localStorage
 function saveGame() {
-    localStorage.setItem("gameState", JSON.stringify(game));
+    localStorage.setItem("gameState", JSON.stringify(gameData));
 }
 // Function to load game state from localStorage
 function loadGame() {
     const savedGame = localStorage.getItem("gameState");
     if (savedGame) {
-        game = JSON.parse(savedGame);
+        gameData = JSON.parse(savedGame);
         updateThingies();
     }
 }
 function updateThingies() {
     if (userOffenseDisplay)
-        userOffenseDisplay.innerHTML = `${game.offense}`;
+        userOffenseDisplay.innerHTML = `${gameData.offense}`;
     if (userDefenseDisplay)
-        userDefenseDisplay.innerHTML = `${game.defense}`;
+        userDefenseDisplay.innerHTML = `${gameData.defense}`;
     if (enemyOffenseDisplay)
-        enemyOffenseDisplay.innerHTML = `${3 * 10 ** game.stage}`;
+        enemyOffenseDisplay.innerHTML = `${3 * 10 ** gameData.stage}`;
     if (enemyDefenseDisplay)
-        enemyDefenseDisplay.innerHTML = `${10 ** (game.stage - 1)}`;
+        enemyDefenseDisplay.innerHTML = `${10 ** (gameData.stage - 1)}`;
     if (stageDisplay)
-        stageDisplay.innerHTML = `Stage: ${game.stage}`;
+        stageDisplay.innerHTML = `Stage: ${gameData.stage}`;
 }
 function statUp(stat) {
     if (stat === "defense") {
-        game.defense = Math.round((game.defense + 0.1 * game.fm) * 10) / 10;
+        gameData.defense =
+            Math.round((gameData.defense + 0.1 * gameData.fm) * 10) / 10;
     }
     else if (stat === "offense") {
-        game.offense = Math.round((game.offense + game.fm) * 10) / 10;
+        gameData.offense = Math.round((gameData.offense + gameData.fm) * 10) / 10;
     }
     saveGame(); // Save game state after updating
     updateThingies();
 }
 function fight() {
-    if (game.offense > 3 * 10 ** game.stage ||
-        game.defense > 10 ** (game.stage - 1)) {
-        game.stage += 1;
+    if (gameData.offense > 3 * 10 ** gameData.stage ||
+        gameData.defense > 10 ** (gameData.stage - 1)) {
+        gameData.stage += 1;
         saveGame(); // Save game state after increasing stage
         updateThingies();
     }
