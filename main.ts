@@ -14,6 +14,13 @@ namespace fighter {
     stage: 1,
   };
 
+  console.log("Initial gameData:", gameData);
+  console.log("userOffenseDisplay:", userOffenseDisplay);
+  console.log("userDefenseDisplay:", userDefenseDisplay);
+  console.log("enemyOffenseDisplay:", enemyOffenseDisplay);
+  console.log("enemyDefenseDisplay:", enemyDefenseDisplay);
+  console.log("stageDisplay:", stageDisplay);
+
   // Function to save game state to localStorage
   function saveGame() {
     localStorage.setItem("gameState", JSON.stringify(gameData));
@@ -22,13 +29,20 @@ namespace fighter {
   // Function to load game state from localStorage
   function loadGame() {
     const savedGame = localStorage.getItem("gameState");
+    console.log("Saved game data:", savedGame);
     if (savedGame) {
-      gameData = JSON.parse(savedGame);
-      updateThingies();
+      try {
+        gameData = JSON.parse(savedGame);
+        console.log("Loaded gameData:", gameData);
+        updateThingies();
+      } catch (e) {
+        console.error("Failed to parse saved game data:", e);
+      }
     }
   }
 
   function updateThingies() {
+    console.log("Updating display with gameData:", gameData);
     if (userOffenseDisplay)
       userOffenseDisplay.innerHTML = `${gameData.offense}`;
     if (userDefenseDisplay)
