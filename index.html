@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/index.css" />
+    <title>Incremental Fighter</title>
+  </head>
+  <body>
+    <h1>Incremental Fighter!</h1>
+    <div class="fighting-area">
+      <h2 id="stage">Stage: 1</h2>
+      <div class="you">
+        <h3>You</h3>
+        <div class="sword">
+          <img src="assets/sword.png" alt="Sword" />
+          <label id="userOffense">0</label><br />
+        </div>
+        <div class="shield">
+          <img src="assets/shield.png" alt="Shield" />
+          <label id="userDefense">0</label><br />
+        </div>
+      </div>
+      <div class="enemy">
+        <h3>Enemy</h3>
+        <div class="sword">
+          <img src="assets/sword.png" alt="Sword" />
+          <label id="enemyOffense">0</label><br />
+        </div>
+        <div class="shield">
+          <img src="assets/shield.png" alt="Shield" />
+          <label id="enemyDefense">0</label><br />
+        </div>
+      </div>
+    </div>
+    <button onclick="statUp('offense')">More Offense</button>
+    <button onclick="statUp('defense')">More Defense</button> <br />
+    <button onclick="fight()">Fight!</button>
+    <hr />
+    <p>version beta 0.0.1</p>
+    <p>Credits:</p>
+    <p>Idea: LethalDolphin (Grass Cutting Incremental)</p>
+    <p>Code: Me</p>
+    <a href="https://fotis2222.github.io/index.html">back</a>
+    <script src="main.js"></script>
+  </body>
+</html>
