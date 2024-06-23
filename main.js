@@ -49,6 +49,7 @@ var fighter;
         saveGame(); // Save game state after updating
         updateThingies();
     }
+    fighter.statUp = statUp;
     function fight() {
         if (gameData.offense > 3 * 10 ** gameData.stage ||
             gameData.defense > 10 ** (gameData.stage - 1)) {
@@ -57,6 +58,7 @@ var fighter;
             updateThingies();
         }
     }
+    fighter.fight = fight;
     // On page load, try to load saved game state
-    loadGame();
+    window.addEventListener("load", loadGame);
 })(fighter || (fighter = {}));

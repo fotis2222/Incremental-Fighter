@@ -42,7 +42,7 @@ namespace fighter {
     if (stageDisplay) stageDisplay.innerHTML = `Stage: ${gameData.stage}`;
   }
 
-  function statUp(stat: string) {
+  export function statUp(stat: string) {
     if (stat === "defense") {
       gameData.defense =
         Math.round((gameData.defense + 0.1 * gameData.fm) * 10) / 10;
@@ -53,7 +53,7 @@ namespace fighter {
     updateThingies();
   }
 
-  function fight() {
+  export function fight() {
     if (
       gameData.offense > 3 * 10 ** gameData.stage ||
       gameData.defense > 10 ** (gameData.stage - 1)
@@ -65,5 +65,5 @@ namespace fighter {
   }
 
   // On page load, try to load saved game state
-  loadGame();
+  window.addEventListener("load", loadGame);
 }
