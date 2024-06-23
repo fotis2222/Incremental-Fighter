@@ -12,6 +12,18 @@ let game = {
     fm: 1,
     stage: 1,
 };
+// Function to save game state to localStorage
+function saveGame() {
+    localStorage.setItem("gameState", JSON.stringify(game));
+}
+// Function to load game state from localStorage
+function loadGame() {
+    const savedGame = localStorage.getItem("gameState");
+    if (savedGame) {
+        game = JSON.parse(savedGame);
+        updateThingies();
+    }
+}
 function updateThingies() {
     if (userOffenseDisplay)
         userOffenseDisplay.innerHTML = `${game.offense.toFixed(1)}`;
@@ -31,6 +43,7 @@ function statUp(stat) {
     else if (stat === "offense") {
         game.offense = Math.round((game.offense + game.fm) * 10) / 10;
     }
+    saveGame(); // Save game state after updating
     updateThingies();
 }
 function fight() {
@@ -40,4 +53,5 @@ function fight() {
         updateThingies();
     }
 }
-updateThingies();
+// On page load, try to load saved game state
+loadGame();
