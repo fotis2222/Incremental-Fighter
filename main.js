@@ -4,53 +4,55 @@ const userDefenseDisplay = document.getElementById("userDefense");
 const enemyOffenseDisplay = document.getElementById("enemyOffense");
 const enemyDefenseDisplay = document.getElementById("enemyDefense");
 const stageDisplay = document.getElementById("stage");
-let gameData = {
-  offense: 0,
-  defense: 0,
-  mana: 0,
-  manaMulti: 0,
-  fm: 1,
-  stage: 1,
+let game = {
+    offense: 0,
+    defense: 0,
+    mana: 0,
+    manaMulti: 0,
+    fm: 1,
+    stage: 1,
 };
 // Function to save game state to localStorage
 function saveGame() {
-  localStorage.setItem("gameState", JSON.stringify(gameData));
+    localStorage.setItem("gameState", JSON.stringify(game));
 }
 // Function to load game state from localStorage
 function loadGame() {
-  const savedGame = localStorage.getItem("gameState");
-  if (savedGame) {
-    game = JSON.parse(savedGame);
-    updateThingies();
-  }
+    const savedGame = localStorage.getItem("gameState");
+    if (savedGame) {
+        game = JSON.parse(savedGame);
+        updateThingies();
+    }
 }
 function updateThingies() {
-  if (userOffenseDisplay) userOffenseDisplay.innerHTML = `${gameData.offense}`;
-  if (userDefenseDisplay) userDefenseDisplay.innerHTML = `${gameData.defense}`;
-  if (enemyOffenseDisplay)
-    enemyOffenseDisplay.innerHTML = `${3 * 10 ** gameData.stage}`;
-  if (enemyDefenseDisplay)
-    enemyDefenseDisplay.innerHTML = `${10 ** (gameData.stage - 1)}`;
-  if (stageDisplay) stageDisplay.innerHTML = `Stage: ${gameData.stage}`;
+    if (userOffenseDisplay)
+        userOffenseDisplay.innerHTML = `${game.offense}`;
+    if (userDefenseDisplay)
+        userDefenseDisplay.innerHTML = `${game.defense}`;
+    if (enemyOffenseDisplay)
+        enemyOffenseDisplay.innerHTML = `${3 * 10 ** game.stage}`;
+    if (enemyDefenseDisplay)
+        enemyDefenseDisplay.innerHTML = `${10 ** (game.stage - 1)}`;
+    if (stageDisplay)
+        stageDisplay.innerHTML = `Stage: ${game.stage}`;
 }
 function statUp(stat) {
-  if (stat === "defense") {
-    gameData.defense = Math.round((game.defense + 0.1 * game.fm) * 10) / 10;
-  } else if (stat === "offense") {
-    gameData.offense = Math.round((game.offense + game.fm) * 10) / 10;
-  }
-  saveGame(); // Save game state after updating
-  updateThingies();
+    if (stat === "defense") {
+        game.defense = Math.round((game.defense + 0.1 * game.fm) * 10) / 10;
+    }
+    else if (stat === "offense") {
+        game.offense = Math.round((game.offense + game.fm) * 10) / 10;
+    }
+    saveGame(); // Save game state after updating
+    updateThingies();
 }
 function fight() {
-  if (
-    gameData.offense > 3 * 10 ** gameData.stage ||
-    gameData.defense > 10 ** (gameData.stage - 1)
-  ) {
-    game.stage += 1;
-    saveGame(); // Save game state after increasing stage
-    updateThingies();
-  }
+    if (game.offense > 3 * 10 ** game.stage ||
+        game.defense > 10 ** (game.stage - 1)) {
+        game.stage += 1;
+        saveGame(); // Save game state after increasing stage
+        updateThingies();
+    }
 }
 // On page load, try to load saved game state
 loadGame();
