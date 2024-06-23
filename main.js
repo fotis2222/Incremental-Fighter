@@ -6,6 +6,7 @@ var fighter;
     const enemyOffenseDisplay = document.getElementById("enemyOffense");
     const enemyDefenseDisplay = document.getElementById("enemyDefense");
     const stageDisplay = document.getElementById("stage");
+    const localStorageKey = "fighterGameState";
     let gameData = {
         offense: 0,
         defense: 0,
@@ -22,11 +23,11 @@ var fighter;
     console.log("stageDisplay:", stageDisplay);
     // Function to save game state to localStorage
     function saveGame() {
-        localStorage.setItem("gameState", JSON.stringify(gameData));
+        localStorage.setItem(localStorageKey, JSON.stringify(gameData));
     }
     // Function to load game state from localStorage
     function loadGame() {
-        const savedGame = localStorage.getItem("gameState");
+        const savedGame = localStorage.getItem(localStorageKey);
         console.log("Saved game data:", savedGame);
         if (savedGame) {
             try {
