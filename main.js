@@ -50,6 +50,7 @@ function fight() {
     if (game.offense > 3 * 10 ** game.stage ||
         game.defense > 10 ** (game.stage - 1)) {
         game.stage += 1;
+        saveGame(); // Save game state after increasing stage
         updateThingies();
     }
 }

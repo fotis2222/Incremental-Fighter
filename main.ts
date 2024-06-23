@@ -57,6 +57,7 @@ function fight() {
     game.defense > 10 ** (game.stage - 1)
   ) {
     game.stage += 1;
+    saveGame(); // Save game state after increasing stage
     updateThingies();
   }
 }
